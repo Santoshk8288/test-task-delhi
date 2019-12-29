@@ -97,6 +97,15 @@ const vote = mongoose.model("votes", voteSchema);
 const twoOptionQuestion = mongoose.model("twooptionquestions", twoOptionQuestionSchema);
 const fourOptionQuestion = mongoose.model("fouroptionquestions", fourOptionQuestionSchema);
 
+app.post('/api/add-user', async(req, res, next)=>{
+  try{
+    user.create(req.body)
+    res.status(200).send({ status: 200, message: "user added succesfully" })
+  } catch (error) {
+    res.status(400).send({ status: 400, message: error.message })
+  }
+})
+
 app.post('/api/login', async(req, res, next) => {
   try{
     const loginUser = await user.find(req.body)
